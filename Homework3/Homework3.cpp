@@ -1,35 +1,53 @@
 ﻿#include <iostream>
 #include <math.h>
+#include <fstream>
 using namespace  std;
 
 int main() {
+
+	setlocale(LC_ALL, "Russian");
+
 	// Задача «Заем». Месячная выплата m по займу в S рублей 
 	//на n лет под процент p вычисляется по формуле.
 	double m, S, p, r, n, power;
-	cout << "Loan S: ";
+	cout << "Размер займа S: ";
 	cin >> S;
-	cout << "Amount of years n: ";
+	cout << "Количество лет n: ";
 	cin >> n;
-	cout << "Percenage p: ";
+	cout << "Процент p: ";
 	cin >> p;
 	r = p / 100;
 	power = pow((1 + r), n);
-	m = (S * r * power) / (12 * (power - 1));
-	cout << "m = " << m << endl << endl;
+	if (power == 1) {
+		cout << "Невозможно вычислить.";
+	}
+	else {
+		m = (S * r * power) / (12 * (power - 1));
+		cout << "m = " << m;
+	}
+	cout << endl << endl;
 
 	// Задача «Ссуда». Под какой процент p выдана ссуда величиной S рублей, 
 	// которая гасится месячными выплатами величиной m в течение n лет.
 	// Формула приведена в предыдущей задаче.
 	double S1, m1, n1, r1, p1;
-	cout << "Loan S: ";
+	cout << "Величина ссуды S: ";
 	cin >> S1;
-	cout << "Monthly payment m: ";
+	cout << "Месячные выплаты величиной m: ";
 	cin >> m1;
-	cout << "Amount of years n: ";
+	cout << "Количество лет n: ";
 	cin >> n1;
-	r1 = pow((12 * m) / (12 * m - S * r), 1 / n1) - 1;
-	p1 = r1 * 100;
-	cout << "p = " << p1 << endl << endl;
+	if (!S) {
+		cout << "Невозможно вычислить.";
+	}
+	else {
+		r1 = 12 * m1 * n1 / S1 - 1;
+		p1 = r1 * 100;
+		cout << "p = " << p1;
+	}
+	cout << endl << endl;
+
+;
 
 	return 0;
 }
